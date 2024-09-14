@@ -46,32 +46,56 @@ class _LoginScreenState extends State<LoginScreen> {
           key: _formKey,
           child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  CupertinoTextField(
-                    controller: _emailController,
-                    placeholder: 'Email',
-                    padding: const EdgeInsets.all(16.0),
-                  ),
-                  const SizedBox(height: 16.0),
-                  CupertinoTextField(
-                    controller: _passwordController,
-                    placeholder: 'Password',
-                    padding: const EdgeInsets.all(16.0),
-                    obscureText: true,
-                  ),
-                  const SizedBox(height: 16.0),
-                  const SizedBox(height: 16.0),
-                  SizedBox(
-                    width: double.infinity,
-                    child: CupertinoButton.filled(
-                      onPressed: _login,
-                      child: const Text('Login'),
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 100.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 100.0,
+                      height: 100.0,
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/brainstorm.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 60),
+                      child: const Text(
+                        'Migraine Tracker',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    CupertinoTextField(
+                      controller: _emailController,
+                      placeholder: 'Email',
+                      padding: const EdgeInsets.all(16.0),
+                    ),
+                    const SizedBox(height: 16.0),
+                    CupertinoTextField(
+                      controller: _passwordController,
+                      placeholder: 'Password',
+                      padding: const EdgeInsets.all(16.0),
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
+                    SizedBox(
+                      width: double.infinity,
+                      child: CupertinoButton.filled(
+                        onPressed: _login,
+                        child: const Text('Login'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
         )
         ),
