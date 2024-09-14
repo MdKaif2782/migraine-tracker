@@ -1,11 +1,18 @@
 // lib/main.dart
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:migraine_tracker/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/login.dart';
 import 'screens/home.dart';
 
 void main() {
+  // Set the status bar color
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: CupertinoColors.systemGrey, // Set the status bar color
+    statusBarBrightness: Brightness.light, // Set the status bar brightness
+    statusBarIconBrightness: Brightness.light, // Set the status bar icon brightness
+  ));
   runApp(const MyApp());
 }
 
