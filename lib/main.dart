@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
+      debugShowCheckedModeBanner: false,
       theme: _isNightMode ? AppTheme.darkTheme : AppTheme.lightTheme,
       home: FutureBuilder<bool>(
         future: _checkUserLoggedIn(),
