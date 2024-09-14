@@ -31,6 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.0.13
+  flutter_svg: ^1.0.3  # Add this line
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -56,6 +57,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/svgs/
   fonts:
     - family: Poppins
       fonts:
