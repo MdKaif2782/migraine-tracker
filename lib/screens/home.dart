@@ -16,69 +16,67 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      // navigationBar: const CupertinoNavigationBar(
-      //   middle: Text('Home'),
-      // ),
-      child: Column(children: <Widget>[
-        Container(
-          padding: const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const HomePageHeader(),
+      child: SingleChildScrollView(
+        child: Column(children: <Widget>[
+          Container(
+            padding: const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const HomePageHeader(),
 
-              const SizedBox(height: 40),
+                const SizedBox(height: 40),
 
-              const AttackBox(),
-              // Add a logout button
-              const SizedBox(height: 28),
-              const Text(
-                  "  Last attack information",
+                const AttackBox(),
+                const SizedBox(height: 28),
+                const Text(
+                    "  Last attack information",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                ),
+                const SizedBox(height: 10),
+
+                const LastAttackInfo(),
+                const SizedBox(height: 28),
+                const Text(
+                  "  Pressure variation forecast",
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w600,
                   ),
-              ),
-              const SizedBox(height: 10),
-
-              const LastAttackInfo(),
-              const SizedBox(height: 28),
-              const Text(
-                "  Pressure variation forecast",
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
                 ),
-              ),
-              const SizedBox(height: 10),
-              const PressureForecastBox(),
+                const SizedBox(height: 10),
+                const PressureForecastBox(),
 
 
-              const SizedBox(height: 28),
+                const SizedBox(height: 28),
 
-              CupertinoButton.filled(
-                child: const Text('Logout'),
-                onPressed: () {
-                  // Perform logout action
-                  // Remove user from shared preferences
-                  Future<void> removeUser() async {
-                    final prefs = await SharedPreferences.getInstance();
-                    await prefs.remove('user');
-                  }
+                CupertinoButton.filled(
+                  child: const Text('Logout', style: TextStyle(color: CupertinoColors.white)),
+                  onPressed: () {
+                    // Perform logout action
+                    // Remove user from shared preferences
+                    Future<void> removeUser() async {
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.remove('user');
+                    }
 
-                  removeUser();
-                  // Navigate to login screen
-                  Navigator.of(context).pushReplacement(
-                    CupertinoPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ),
-                  );
-                },
-              ),
-            ],
+                    removeUser();
+                    // Navigate to login screen
+                    Navigator.of(context).pushReplacement(
+                      CupertinoPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }
