@@ -27,7 +27,7 @@ class AppTheme {
       navTitleTextStyle: TextStyle(
         color: CupertinoColors.black,
         fontSize: 20.0,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w600,
         fontFamily: 'Poppins',
       ),
       navLargeTitleTextStyle: TextStyle(
