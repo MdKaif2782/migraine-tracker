@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'auth.dart';
 import 'login.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,58 +21,38 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(children: <Widget>[
           Container(
             padding: const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const HomePageHeader(),
+                HomePageHeader(),
 
-                const SizedBox(height: 40),
+                SizedBox(height: 40),
 
-                const AttackBox(),
-                const SizedBox(height: 28),
-                const Text(
+                AttackBox(),
+                SizedBox(height: 28),
+                Text(
                     "  Last attack information",
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,
                     ),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
 
-                const LastAttackInfo(),
-                const SizedBox(height: 28),
-                const Text(
+                LastAttackInfo(),
+                SizedBox(height: 28),
+                Text(
                   "  Pressure variation forecast",
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 10),
-                const PressureForecastBox(),
+                SizedBox(height: 10),
+                PressureForecastBox(),
 
 
-                const SizedBox(height: 28),
-
-                CupertinoButton.filled(
-                  child: const Text('Logout', style: TextStyle(color: CupertinoColors.white)),
-                  onPressed: () {
-                    // Perform logout action
-                    // Remove user from shared preferences
-                    Future<void> removeUser() async {
-                      final prefs = await SharedPreferences.getInstance();
-                      await prefs.remove('user');
-                    }
-
-                    removeUser();
-                    // Navigate to login screen
-                    Navigator.of(context).pushReplacement(
-                      CupertinoPageRoute(
-                        builder: (context) => const LoginScreen(),
-                      ),
-                    );
-                  },
-                ),
+                SizedBox(height: 28),
               ],
             ),
           ),
