@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app.dart';
 import 'home.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,12 +26,16 @@ class _LoginScreenState extends State<LoginScreen> {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('user', _emailController.text);
       }
+
       _saveUser();
       // Navigate to home screen
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
         CupertinoPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (BuildContext context) {
+            return const App();
+          },
         ),
+        (_) => false,
       );
     }
   }
@@ -116,7 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                       child: CupertinoButton.filled(
                         onPressed: _login,
-                        child: const Text('Login', style: TextStyle(color: CupertinoColors.white)),
+                        child: const Text('Login',
+                            style: TextStyle(color: CupertinoColors.white)),
                       ),
                     ),
                   ],
