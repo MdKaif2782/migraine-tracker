@@ -1,10 +1,15 @@
-// lib/main.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:migraine_tracker/screens/health.dart';
+import 'package:migraine_tracker/screens/home.dart';
+import 'package:migraine_tracker/screens/login.dart';
+import 'package:migraine_tracker/screens/profile.dart';
+import 'package:migraine_tracker/screens/register.dart';
+import 'package:migraine_tracker/screens/report.dart';
 import 'package:migraine_tracker/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'screens/login.dart';
-import 'screens/home.dart';
+import 'screens/auth.dart';
+import 'screens/app.dart';
 
 void main() {
   // Set the status bar color
@@ -53,9 +58,9 @@ class _MyAppState extends State<MyApp> {
             );
           } else {
             if (snapshot.data == true) {
-              return const HomeScreen();
+              return const App();
             } else {
-              return const LoginScreen();
+              return const Auth();
             }
           }
         },
