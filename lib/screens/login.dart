@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app.dart';
 import 'home.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,26 +26,32 @@ class _LoginScreenState extends State<LoginScreen> {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('user', _emailController.text);
       }
+
       _saveUser();
       // Navigate to home screen
-      Navigator.of(context).pushReplacement(
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
         CupertinoPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (BuildContext context) {
+            return const App();
+          },
         ),
+        (_) => false,
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final double topMargin = MediaQuery.of(context).size.height * 0.1;
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
         middle: Text('Login'),
       ),
-      child: Center(
-        child: Form(
-          key: _formKey,
-          child: Padding(
+      child: SingleChildScrollView(
+        child: Center(
+          child: Form(
+            key: _formKey,
+            child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
                 margin: const EdgeInsets.only(bottom: 100.0),
@@ -52,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
+                    SizedBox(height: topMargin),
                     Container(
                       width: 100.0,
                       height: 100.0,
@@ -77,6 +85,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: _emailController,
                       placeholder: 'Email',
                       padding: const EdgeInsets.all(16.0),
+                      placeholderStyle: const TextStyle(
+                        color: CupertinoColors.systemGrey3,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: CupertinoColors.systemGrey,
+                          width: 0.2,
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                        color: CupertinoColors.white,
+                      ),
                     ),
                     const SizedBox(height: 16.0),
                     CupertinoTextField(
@@ -84,6 +103,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       placeholder: 'Password',
                       padding: const EdgeInsets.all(16.0),
                       obscureText: true,
+                      placeholderStyle: const TextStyle(
+                        color: CupertinoColors.systemGrey3,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: CupertinoColors.systemGrey,
+                          width: 0.2,
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                        color: CupertinoColors.white,
+                      ),
                     ),
                     const SizedBox(height: 16.0),
                     const SizedBox(height: 16.0),
@@ -91,13 +121,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                       child: CupertinoButton.filled(
                         onPressed: _login,
-                        child: const Text('Login'),
+                        child: const Text('Login',
+                            style: TextStyle(color: CupertinoColors.white)),
                       ),
                     ),
                   ],
                 ),
               ),
-        )
+            ),
+          ),
         ),
       ),
     );
