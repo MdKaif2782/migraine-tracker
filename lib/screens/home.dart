@@ -146,7 +146,6 @@ class LastAttackInfo extends StatelessWidget {
   }
 }
 
-
 class AttackBox extends StatelessWidget {
   const AttackBox({
     super.key,
@@ -193,7 +192,7 @@ class AttackBox extends StatelessWidget {
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                child:SvgPicture.asset(
+                child: SvgPicture.asset(
                   'assets/svgs/happy_person.svg',
                 ),
               ),
@@ -253,7 +252,6 @@ class HomePageHeader extends StatelessWidget {
             ),
           ],
         ),
-
         Container(
           width: 40.0,
           height: 40.0,

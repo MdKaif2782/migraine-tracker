@@ -16,7 +16,8 @@ void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: CupertinoColors.systemGrey, // Set the status bar color
     statusBarBrightness: Brightness.light, // Set the status bar brightness
-    statusBarIconBrightness: Brightness.light, // Set the status bar icon brightness
+    statusBarIconBrightness:
+        Brightness.light, // Set the status bar icon brightness
   ));
   runApp(const MyApp());
 }
