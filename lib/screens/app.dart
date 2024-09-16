@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:migraine_tracker/screens/survey.dart';
 import 'package:migraine_tracker/theme.dart';
 import "package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart";
@@ -16,6 +17,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   List<Widget> _buildScreens() {
+
     return [
       const CupertinoApp(
         debugShowCheckedModeBanner: false,
@@ -47,6 +49,8 @@ class _AppState extends State<App> {
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
+    //get context
+    final BuildContext appContext = context;
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
@@ -66,6 +70,13 @@ class _AppState extends State<App> {
         icon: const Icon(CupertinoIcons.add, color: CupertinoColors.white),
         activeColorPrimary: CupertinoColors.black,
         inactiveColorPrimary: CupertinoColors.systemGrey,
+        onPressed: (context){
+            Navigator
+                .of(appContext, rootNavigator: true)
+                .pushAndRemoveUntil(
+                    CupertinoPageRoute(builder: (BuildContext context)
+                    {return const SurveyScreen();}, ), (_) => false, );
+        }
       ),
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.doc_chart),
@@ -97,7 +108,7 @@ class _AppState extends State<App> {
           stateManagement: true,
           hideNavigationBarWhenKeyboardAppears: true,
           popBehaviorOnSelectedNavBarItemPress: PopBehavior.once,
-          padding: const EdgeInsets.all(5),
+          padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.all(2.5),
           backgroundColor: CupertinoColors.white,
           isVisible: true,
