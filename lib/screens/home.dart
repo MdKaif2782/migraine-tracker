@@ -1,10 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'auth.dart';
-import 'login.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,45 +13,42 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: SingleChildScrollView(
-        child: Column(children: <Widget>[
-          Container(
-            padding: const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                HomePageHeader(),
-
-                SizedBox(height: 40),
-
-                AttackBox(),
-                SizedBox(height: 28),
-                Text(
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  HomePageHeader(),
+                  SizedBox(height: 40),
+                  AttackBox(),
+                  SizedBox(height: 28),
+                  Text(
                     "  Last attack information",
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w600,
                     ),
-                ),
-                SizedBox(height: 10),
-
-                LastAttackInfo(),
-                SizedBox(height: 28),
-                Text(
-                  "  Pressure variation forecast",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
                   ),
-                ),
-                SizedBox(height: 10),
-                PressureForecastBox(),
-
-
-                SizedBox(height: 28),
-              ],
+                  SizedBox(height: 10),
+                  LastAttackInfo(),
+                  SizedBox(height: 28),
+                  Text(
+                    "  Pressure variation forecast",
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  PressureForecastBox(),
+                  SizedBox(height: 28),
+                ],
+              ),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }
