@@ -146,6 +146,7 @@ class LastAttackInfo extends StatelessWidget {
   }
 }
 
+
 class AttackBox extends StatelessWidget {
   const AttackBox({
     super.key,
