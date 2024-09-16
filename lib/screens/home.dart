@@ -12,42 +12,44 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  HomePageHeader(),
-                  SizedBox(height: 40),
-                  AttackBox(),
-                  SizedBox(height: 28),
-                  Text(
-                    "  Last attack information",
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(16.0),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    HomePageHeader(),
+                    SizedBox(height: 40),
+                    AttackBox(),
+                    SizedBox(height: 28),
+                    Text(
+                      "  Last attack information",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  LastAttackInfo(),
-                  SizedBox(height: 28),
-                  Text(
-                    "  Pressure variation forecast",
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
+                    SizedBox(height: 10),
+                    LastAttackInfo(),
+                    SizedBox(height: 28),
+                    Text(
+                      "  Pressure variation forecast",
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  PressureForecastBox(),
-                  SizedBox(height: 28),
-                ],
+                    SizedBox(height: 10),
+                    PressureForecastBox(),
+                    SizedBox(height: 70),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
