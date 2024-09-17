@@ -19,6 +19,11 @@ class AppTheme {
         fontSize: 16.0,
         fontFamily: 'Poppins',
       ),
+      navActionTextStyle: TextStyle(
+        color: CupertinoColors.black,
+        fontSize: 16.0,
+        fontFamily: 'Poppins',
+      ),
       tabLabelTextStyle: TextStyle(
         color: CupertinoColors.inactiveGray,
         fontSize: 10.0,
