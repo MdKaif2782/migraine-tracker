@@ -22,6 +22,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     ));
   }
 
+  //screen height
+  double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -29,8 +32,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             children: [
               Container(
+                height: screenHeight(context) * 0.2,
+                padding: const EdgeInsets.only(left: 10,right: 10,top: 10),
                 decoration: const BoxDecoration(
                   color: CupertinoColors.darkBackgroundGray,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/doodle-mt.png'),
+                    opacity: 0.3,
+                    //white color filter,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 child: Column(
                   children: [
