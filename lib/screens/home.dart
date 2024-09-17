@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,15 +9,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: CupertinoColors.lightBackgroundGray, // Set the status bar color to black
-      statusBarBrightness: Brightness.dark, // Set the status bar brightness
-      statusBarIconBrightness: Brightness.light, // Set the status bar icon brightness
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
