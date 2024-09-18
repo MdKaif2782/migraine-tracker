@@ -195,7 +195,7 @@ class PersonalInformation extends StatelessWidget {
         margin: const EdgeInsets.only(left: 16, right: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: CupertinoColors.systemGrey3,
+          color: CupertinoColors.systemGrey3.withOpacity(0.5),
         ),
         padding: const EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 4),
         child: const Row(
@@ -245,7 +245,7 @@ class PreferenceAndSettings extends StatelessWidget {
             margin: const EdgeInsets.only(left: 16, right: 16),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: CupertinoColors.systemGrey3,
+              color: CupertinoColors.systemGrey3.withOpacity(0.5),
             ),
             padding: const EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 4),
             child: const Row(
