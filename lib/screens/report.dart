@@ -254,7 +254,7 @@ class ScreenTimeGraph extends StatelessWidget {
                   dataSource: data,
                   xValueMapper: (_ScreenTimeData data, _) => data.date,
                   yValueMapper: (_ScreenTimeData data, _) => data.timeInHours,
-                  color: CupertinoColors.black,
+                  color: CupertinoColors.darkBackgroundGray,
                   name: 'Screen Time (in hours)',
                   spacing: 0.2, // Add gaps between bars
                   dataLabelSettings: const DataLabelSettings(isVisible: true),
