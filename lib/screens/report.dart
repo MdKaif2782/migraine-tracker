@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({super.key});
@@ -42,23 +41,24 @@ class _ReportScreenState extends State<ReportScreen> {
         middle: Text('Report', style: TextStyle(fontWeight: FontWeight.w400)),
       ),
       child: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
-              child: const PeriodSelectionRow(),
-            ),
-            const SizedBox(height: 10),
-            const StyledTitle(text: 'Recent attack report'),
-            const SizedBox(height: 10),
-            RecentAttackGraph(data: attackData),
-            const SizedBox(height: 20),
-            const StyledTitle(text: 'Screen time report'),
-            const SizedBox(height: 10),
-            ScreenTimeGraph(data: screenTimeData),
-
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+                child: const PeriodSelectionRow(),
+              ),
+              const SizedBox(height: 10),
+              const StyledTitle(text: 'Recent attack report'),
+              const SizedBox(height: 10),
+              RecentAttackGraph(data: attackData),
+              const SizedBox(height: 20),
+              const StyledTitle(text: 'Screen time report'),
+              const SizedBox(height: 10),
+              ScreenTimeGraph(data: screenTimeData),
+            ],
+          ),
         ),
       ),
     );
