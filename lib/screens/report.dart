@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({super.key});
@@ -11,6 +13,27 @@ class ReportScreen extends StatefulWidget {
 
 class _ReportScreenState extends State<ReportScreen> {
   String selectedPeriod = "Daily";
+
+  List<_AttackData> attackData = [
+    _AttackData("Sun", 8),
+    _AttackData("Mon", 5),
+    _AttackData("Tue", 7),
+    _AttackData("Wed", 6),
+    _AttackData("Thu", 9),
+    _AttackData("Fri", 4),
+    _AttackData("Sat", 8),
+  ];
+
+  List<_ScreenTimeData> screenTimeData = [
+    _ScreenTimeData("Sun", 8.4),
+    _ScreenTimeData("Mon", 5.2),
+    _ScreenTimeData("Tue", 7.3),
+    _ScreenTimeData("Wed", 6.5),
+    _ScreenTimeData("Thu", 9.9),
+    _ScreenTimeData("Fri", 4.03),
+    _ScreenTimeData("Sat", 8.01),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,31 +50,87 @@ class _ReportScreenState extends State<ReportScreen> {
               child: const PeriodSelectionRow(),
             ),
             const SizedBox(height: 10),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.only(left: 16),
-              child: const Text("Recent attack report",
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: CupertinoColors.black)),
-            ),
+            const StyledTitle(text: 'Recent attack report'),
             const SizedBox(height: 10),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(20.0),
-              margin: const EdgeInsets.only(left: 16, right: 16),
-              decoration: BoxDecoration(
-                color: CupertinoColors.systemGrey3.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              child: const Column(
-                children: [
-                  Text("No recent attack"),
-                ],
-              ),
-            )
+            RecentAttackGraph(data: attackData),
+            const SizedBox(height: 20),
+            const StyledTitle(text: 'Screen time report'),
+            const SizedBox(height: 10),
+            ScreenTimeGraph(data: screenTimeData),
+
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class RecentAttackGraph extends StatelessWidget {
+  const RecentAttackGraph({
+    super.key,
+    required this.data,
+  });
+
+  final List<_AttackData> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.only(left: 16, right: 16),
+      decoration: BoxDecoration(
+        color: CupertinoColors.systemGrey3.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            // 70% of the screen width
+            height: MediaQuery.of(context).size.width * 0.6,
+            child: SfCartesianChart(
+                primaryXAxis: const CategoryAxis(),
+                // Chart title
+                // Enable legend
+                legend: const Legend(isVisible: true),
+                // Enable tooltip
+                tooltipBehavior: TooltipBehavior(enable: true),
+                series: <CartesianSeries<_AttackData, String>>[
+                  LineSeries<_AttackData, String>(
+                      dataSource: data,
+                      xValueMapper: (_AttackData sales, _) => sales.date,
+                      yValueMapper: (_AttackData sales, _) => sales.intensity,
+                      name: 'Migraine Intensity',
+                      color: CupertinoColors.darkBackgroundGray,
+                      // Enable data label
+                      dataLabelSettings: const DataLabelSettings(isVisible: true))
+                ]),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class StyledTitle extends StatelessWidget {
+  final String text;
+
+  const StyledTitle({
+    super.key,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.only(left: 16),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: CupertinoColors.black,
         ),
       ),
     );
@@ -136,9 +215,70 @@ Widget _buildPeriodButton(String period) {
 }
 }
 
+class ScreenTimeGraph extends StatelessWidget {
+  const ScreenTimeGraph({
+    super.key,
+    required this.data,
+  });
+
+  final List<_ScreenTimeData> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 16, bottom: 8),
+      margin: const EdgeInsets.only(left: 16, right: 16),
+      decoration: BoxDecoration(
+        color: CupertinoColors.systemGrey3.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.width * 0.6,
+            child: SfCartesianChart(
+              primaryXAxis: const CategoryAxis(
+                labelRotation: 45, // Rotate labels for better readability
+                majorTickLines: MajorTickLines(size: 0),
+                majorGridLines: MajorGridLines(width: 0),
+              ),
+              primaryYAxis: const NumericAxis(
+                minimum: 0,
+                interval: 1,
+                majorTickLines: MajorTickLines(size: 0),
+                majorGridLines: MajorGridLines(width: 0.5),
+              ),
+              series: <CartesianSeries<dynamic, dynamic>>[
+                ColumnSeries<_ScreenTimeData, String>(
+                  dataSource: data,
+                  xValueMapper: (_ScreenTimeData data, _) => data.date,
+                  yValueMapper: (_ScreenTimeData data, _) => data.timeInHours,
+                  color: CupertinoColors.black,
+                  name: 'Screen Time (in hours)',
+                  spacing: 0.2, // Add gaps between bars
+                  dataLabelSettings: const DataLabelSettings(isVisible: true),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
 class _AttackData {
   _AttackData(this.date, this.intensity);
 
   final String date;
   final double intensity;
+}
+
+class _ScreenTimeData {
+  _ScreenTimeData(this.date, this.timeInHours);
+
+  final String date;
+  final double timeInHours;
 }
