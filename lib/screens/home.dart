@@ -266,8 +266,7 @@ class HomePageHeader extends StatelessWidget {
               ),
             ),
             image: DecorationImage(
-              image: NetworkImage(
-                  "https://s.abcnews.com/images/US/ted-bundy-1-ap-er-190213_hpMain_16x9_992.jpg?w=384"),
+              image: AssetImage('assets/images/avatar.jpg'),
               fit: BoxFit.cover,
             ),
           ),

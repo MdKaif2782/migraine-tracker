@@ -38,27 +38,37 @@ class _ReportScreenState extends State<ReportScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('Report', style: TextStyle(fontWeight: FontWeight.w400)),
+        middle: Text('Migraine report', style: TextStyle(fontWeight: FontWeight.w400)),
       ),
       child: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              Container(
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
-                child: const PeriodSelectionRow(),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+              child: const PeriodSelectionRow(),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        const StyledTitle(text: 'Recent attack report'),
+                        const SizedBox(height: 10),
+                        RecentAttackGraph(data: attackData),
+                        const SizedBox(height: 20),
+                        const StyledTitle(text: 'Screen time report'),
+                        const SizedBox(height: 10),
+                        ScreenTimeGraph(data: screenTimeData),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              const StyledTitle(text: 'Recent attack report'),
-              const SizedBox(height: 10),
-              RecentAttackGraph(data: attackData),
-              const SizedBox(height: 20),
-              const StyledTitle(text: 'Screen time report'),
-              const SizedBox(height: 10),
-              ScreenTimeGraph(data: screenTimeData),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -235,19 +245,42 @@ class ScreenTimeGraph extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: 8),
+                  width: 16,
+                  height: 3,
+                  color: CupertinoColors.darkBackgroundGray,
+                ),
+                const Text(
+                  'Screen time (in hours)',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: CupertinoColors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
           SizedBox(
-            height: MediaQuery.of(context).size.width * 0.6,
+            height: MediaQuery.of(context).size.width * 0.5,
             child: SfCartesianChart(
               primaryXAxis: const CategoryAxis(
-                labelRotation: 45, // Rotate labels for better readability
+                labelRotation: 0, // Rotate labels for better readability
                 majorTickLines: MajorTickLines(size: 0),
                 majorGridLines: MajorGridLines(width: 0),
               ),
               primaryYAxis: const NumericAxis(
                 minimum: 0,
-                interval: 1,
+                interval: 2,
                 majorTickLines: MajorTickLines(size: 0),
-                majorGridLines: MajorGridLines(width: 0.5),
+                majorGridLines: MajorGridLines(width: 0),
               ),
               series: <CartesianSeries<dynamic, dynamic>>[
                 ColumnSeries<_ScreenTimeData, String>(
