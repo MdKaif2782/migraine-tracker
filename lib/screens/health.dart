@@ -26,7 +26,7 @@ class _HealthState extends State<HealthScreen> {
 
     return CupertinoPageScaffold(
         navigationBar: const CupertinoNavigationBar(
-          middle: Text('Health', style: TextStyle(fontWeight: FontWeight.w400)),
+          middle: Text('Health report', style: TextStyle(fontWeight: FontWeight.w400)),
         ),
         child: SafeArea(
           child: Expanded(
