@@ -37,81 +37,166 @@ class _HealthState extends State<HealthScreen> {
                       const SizedBox(height: 10),
                       HealthChartCircular(width: width, chartData: chartData),
                       StepCard(chartData: chartData, width: width),
+                      SleepCard(width: width, chartData: chartData),
+                      const MediactionCard(),
+                      // make a workout card with icon , duration and 'workout this week' text ..no progress bar and all 3 in a row
                       Container(
+                        margin: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           color: CupertinoColors.systemGrey3.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        margin: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
+                        child: const Row(
                           children: [
-                            Row(
-                              children: [
-                                const Opacity(opacity: 0.5,child: Icon(Icons.bedtime, color: CupertinoColors.darkBackgroundGray, size: 24)),
-                                const Text('  7h 10m', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-                                const Spacer(),
-                                Container(
-                                  padding: const EdgeInsets.only(left: 12, right: 12, top: 5, bottom: 5),
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.25),
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: const Text('6:20AM \n- 1:30PM', style: TextStyle(fontSize: 16,color: CupertinoColors.white, fontWeight: FontWeight.w500)),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                // Container(
-                                //   padding: const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
-                                //   decoration: BoxDecoration(
-                                //     color: CupertinoColors.darkBackgroundGray.withOpacity(0.35),
-                                //     borderRadius: BorderRadius.circular(100),
-                                //   ),
-                                //   child: const Center(child: Text('Record', style: TextStyle(fontSize: 16,color: CupertinoColors.white, fontWeight: FontWeight.w500))),
-                                // ),
-                                const Row(
-                                  children: [
-                                    Opacity(opacity: 0.5,child: Icon(Icons.timer_outlined, color: CupertinoColors.darkBackgroundGray, size: 24)),
-                                    Opacity(opacity: 0.5,
-                                    child: Text(" Record this", style: TextStyle(fontSize: 16, color: CupertinoColors.darkBackgroundGray, fontWeight: FontWeight.w500))),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Container(
-                                  width: width * 0.4,
-                                  height: 10,
-                                  decoration: BoxDecoration(
-                                    color: CupertinoColors.darkBackgroundGray.withOpacity(0.35),
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: FractionallySizedBox(
-                                    widthFactor: chartData.first.y/100,
-                                    alignment: Alignment.centerLeft,
-                                    child: Container(
-                                      decoration: const BoxDecoration(
-                                        color: CupertinoColors.darkBackgroundGray,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(16),
-                                          bottomLeft: Radius.circular(16),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
+                            Opacity(opacity: 0.5,child: Icon(Icons.directions_run, color: CupertinoColors.darkBackgroundGray, size: 24)),
+                            Text('  6:59:01', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                            Spacer(),
+                            Opacity(opacity: 0.5,child: Text('Workouts this week', style: TextStyle(fontSize: 16, color: CupertinoColors.darkBackgroundGray, fontWeight: FontWeight.w500))),
                           ],
-                        )
-                      )
+                        ),
+                      ),
                     ]
                   )),
                 ],
               )
           )
         )
+    );
+  }
+}
+
+class MediactionCard extends StatelessWidget {
+  const MediactionCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: CupertinoColors.systemGrey3.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          const Row(
+            children: [
+              Opacity(opacity: 0.5 ,child: Icon(Icons.medical_services, color: CupertinoColors.darkBackgroundGray, size: 24)),
+              Text('  Get Medication tips', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              const Text('Submit your health report', style: TextStyle(fontSize: 16, color: CupertinoColors.darkBackgroundGray, fontWeight: FontWeight.w500)),
+              const Spacer(),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ReportScreen()),
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.darkBackgroundGray.withOpacity(0.35),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Text('Submit', style: TextStyle(fontSize: 16,color: CupertinoColors.white, fontWeight: FontWeight.w500)),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class SleepCard extends StatelessWidget {
+  const SleepCard({
+    super.key,
+    required this.width,
+    required this.chartData,
+  });
+
+  final double width;
+  final List<ChartData> chartData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: CupertinoColors.systemGrey3.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      margin: const EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const Opacity(opacity: 0.5,child: Icon(Icons.bedtime, color: CupertinoColors.darkBackgroundGray, size: 24)),
+              const Text('  7h 10m', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.only(left: 12, right: 12, top: 5, bottom: 5),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.25),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: const Text('6:20AM \n- 1:30PM', style: TextStyle(fontSize: 16,color: CupertinoColors.white, fontWeight: FontWeight.w500)),
+              )
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              // Container(
+              //   padding: const EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10),
+              //   decoration: BoxDecoration(
+              //     color: CupertinoColors.darkBackgroundGray.withOpacity(0.35),
+              //     borderRadius: BorderRadius.circular(100),
+              //   ),
+              //   child: const Center(child: Text('Record', style: TextStyle(fontSize: 16,color: CupertinoColors.white, fontWeight: FontWeight.w500))),
+              // ),
+              const Row(
+                children: [
+                  Opacity(opacity: 0.5,child: Icon(Icons.timer_outlined, color: CupertinoColors.darkBackgroundGray, size: 24)),
+                  Opacity(opacity: 0.5,
+                  child: Text(" Record this", style: TextStyle(fontSize: 16, color: CupertinoColors.darkBackgroundGray, fontWeight: FontWeight.w500))),
+                ],
+              ),
+              const Spacer(),
+              Container(
+                width: width * 0.4,
+                height: 10,
+                decoration: BoxDecoration(
+                  color: CupertinoColors.darkBackgroundGray.withOpacity(0.35),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: FractionallySizedBox(
+                  widthFactor: chartData.first.y/100,
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: CupertinoColors.darkBackgroundGray,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(16),
+                        bottomLeft: Radius.circular(16),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      )
     );
   }
 }
