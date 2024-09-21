@@ -38,7 +38,7 @@ class _ReportScreenState extends State<ReportScreen> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
-        middle: Text('Report', style: TextStyle(fontWeight: FontWeight.w400)),
+        middle: Text('Migraine report', style: TextStyle(fontWeight: FontWeight.w400)),
       ),
       child: SafeArea(
         child: Column(
